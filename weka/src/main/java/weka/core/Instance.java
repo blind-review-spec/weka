@@ -221,6 +221,8 @@ public interface Instance extends Copyable {
    * @param attIndex the attribute's index
    * @return true if the value is "missing"
    */
+  //@ requires attIndex >= 0;
+  //@ requires attIndex < numAttributes();
   public boolean isMissing(int attIndex);
 
   /**
@@ -256,6 +258,7 @@ public interface Instance extends Copyable {
    * 
    * @return the number of attributes as an integer
    */
+  //@ requires true;
   public int numAttributes();
 
   /**
@@ -388,6 +391,11 @@ public interface Instance extends Copyable {
    *           or a string, or the supplied value couldn't be found for a
    *           nominal attribute
    */
+  //@ requires dataset() != null;
+  //@ requires attIndex >= 0;
+  //@ requires attIndex < numAttributes();
+  //@ requires attribute(attIndex).isNominal() || attribute(attIndex).isString();
+  //@ requires attribute(attIndex).isNominal() && attribute(attIndex).indexOfValue(value) != -1;
   public void setValue(int attIndex, String value);
 
   /**
@@ -583,6 +591,8 @@ public interface Instance extends Copyable {
    *         nominal (or a string) then it returns the value's index as a
    *         double).
    */
+  //@ requires attIndex >= 0;
+  //@ requires attIndex < numAttributes();
   public double value(int attIndex);
 
   /**
@@ -594,6 +604,9 @@ public interface Instance extends Copyable {
    *         nominal (or a string) then it returns the value's index as a
    *         double).
    */
+  //@ requires dataset() != null;
+  //@ indexOfIndex >= 0;
+  //@ requires indexOfIndex < numAttributes();
   public double valueSparse(int indexOfIndex);
 
   /**

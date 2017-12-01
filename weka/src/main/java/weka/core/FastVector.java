@@ -60,6 +60,7 @@ public class FastVector<E> extends ArrayList<E> implements Copyable,
    * 
    * @param element the element to add
    */
+  //@ requires true;
   public final void addElement(E element) {
     add(element);
   }
@@ -95,6 +96,8 @@ public class FastVector<E> extends ArrayList<E> implements Copyable,
    * @param index the element's index
    * @return the element with the given index
    */
+  //@ requires index >= 0;
+  //@ requires index < size();
   public final E elementAt(int index) {
     return get(index);
   }

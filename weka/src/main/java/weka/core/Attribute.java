@@ -578,6 +578,7 @@ public class Attribute implements Copyable, Serializable, RevisionHandler {
    * @return the index of the given attribute value if attribute is nominal or a
    *         string, -1 if it is not or the value can't be found
    */
+  //@ requires value != null;
   public final int indexOfValue(String value) {
 
     if (!isNominal() && !isString()) {
@@ -764,6 +765,8 @@ public class Attribute implements Copyable, Serializable, RevisionHandler {
    * @param valIndex the value's index
    * @return the attribute's value as a string
    */
+  //@ requires valIndex >= 0;
+  //@ requires valIndex < numValues();
   public final/* @ non_null pure @ */String value(int valIndex) {
 
     if (!isNominal() && !isString()) {
