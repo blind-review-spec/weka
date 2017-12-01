@@ -416,6 +416,7 @@ RevisionHandler {
    * @param instance the instance to check
    * @return true if the instance is compatible with the dataset
    */
+  //@ requires instance != null;
   public/* @pure@ */boolean checkInstance(Instance instance) {
 
     if (instance.numAttributes() != numAttributes()) {
@@ -715,6 +716,7 @@ RevisionHandler {
    */
   // @ requires 0 <= position;
   // @ requires position <= numAttributes();
+  // @ requires attribute(att.name()) != null;
   public void insertAttributeAt(/* @non_null@ */Attribute att, int position) {
 
     if ((position < 0) || (position > m_Attributes.size())) {
@@ -1459,6 +1461,8 @@ RevisionHandler {
    * @param classIndex the new class index (index starts with 0)
    * @throws IllegalArgumentException if the class index is too big or < 0
    */
+  //@ requires classIndex >= 0;
+  //@ requires classIndex < numAttributes();
   public void setClassIndex(int classIndex) {
 
     if (classIndex >= numAttributes()) {
